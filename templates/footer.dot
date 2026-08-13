@@ -1,0 +1,18 @@
+    subgraph cluster_legend {
+        label="Legend"
+
+        subgraph cluster_ko {
+            label="Knowledge Outcome"
+            fontsize=14
+
+            rankdir=LR
+
+            ko_key1 [label="ADR", shape=box]
+            ko_key2 [label="Classification", shape=diamond]
+            ko_key3 [label="Reasoning only", shape=oval, style=solid, peripheries=2]
+
+            ko_key1 -> ko_key2 [style=invis]
+            ko_key2 -> ko_key3 [style=invis]
+        }
+    }
+}

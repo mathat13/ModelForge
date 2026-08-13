@@ -1,0 +1,22 @@
+digraph {
+    rankdir=TB
+
+    graph [
+        ranksep=1.2
+        nodesep=0.8
+        pad=0.4
+        splines=ortho
+        overlap=false
+        fontname="Helvetica"
+    ]
+
+    node [
+        margin="0.3,0.15"
+        fontsize=18
+        fontname="Helvetica"
+        style=solid
+    ]
+
+    edge [
+        fontname="Helvetica"
+    ]
