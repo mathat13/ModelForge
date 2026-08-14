@@ -21,52 +21,51 @@ digraph {
         fontname="Helvetica"
     ]
 authority [
-    label="What makes engineering information authoritative?"
+    label="What makes engineering\ninformation\nauthoritative?"
     shape=diamond
 ]
 documentation_definition [
-    label="What is repository documentation?"
+    label="What is repository\ndocumentation?"
     shape=oval
 ]
 engineering_information_types [
-    label="What types of engineering information exist?"
+    label="What types of engineering\ninformation exist?"
     shape=diamond
 ]
 engineering_phases [
-    label="What are the phases of engineering?"
+    label="What are the phases of\nengineering?"
     shape=diamond
 ]
 engineering_reasoning_phases [
-    label="What are the phases of engineering reasoning?"
+    label="What are the phases of\nengineering reasoning?"
     shape=diamond
 ]
 kb_organization [
-    label="How should the knowledge base be organized?"
+    label="How should the knowledge\nbase be organized?"
     shape=oval
-    peripheries=2
 ]
 information_authority [
-    label="What is the authoritative source for each engineering information type?"
+    label="What is the authoritative\nsource for each\nengineering information\ntype?"
     shape=oval
 ]
 kb_repo_responsibility [
-    label="What are the responsibilities of the Knowledge Base and Repository?"
+    label="What are the\nresponsibilities of the\nKnowledge Base and\nRepository?"
     shape=box
 ]
 information_type_authority [
-    label="Which engineering information types are authoritative?"
+    label="Which engineering\ninformation types are\nauthoritative?"
     shape=diamond
 ]
 documentation_responsibility [
-    label="What responsibilities should repository documentation have?"
+    label="What responsibilities\nshould repository\ndocumentation have?"
     shape=oval
 ]
 kb_repo_docs_relationship [
-    label="What relationship should exist between repository documentation and the knowledge base?"
+    label="What relationship should\nexist between repository\ndocumentation and the\nknowledge base?"
     shape=oval
 ]
 project_artifact_organization [
-    label="How should project artifacts be organized?"
+    label="How should project\nartifacts be organized?"
     shape=box
 ]
 kb_repo_responsibility -> information_authority

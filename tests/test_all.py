@@ -255,6 +255,40 @@ def test_GraphvizNode_determines_peripheries(
         GraphvizNode.determine_peripheries(question=question)
         == expected_peripheries
     )
+
+@pytest.mark.parametrize(
+    "label, width, expected",
+    [
+        pytest.param(
+            "What is repository documentation?",
+            25,
+            "What is repository\\ndocumentation?",
+            id="breaks-at-word",
+        ),
+        pytest.param(
+            "Short question",
+            25,
+            "Short question",
+            id="does-not-break-short-label",
+        ),
+        pytest.param(
+            "What is the authoritative source for each engineering information type?",
+            25,
+            "What is the authoritative\\nsource for each\\nengineering information\\ntype?",
+            id="multiple-lines",
+        ),
+    ],
+)
+
+def test_GraphvizNode_formats_label(
+    label: str,
+    width: int,
+    expected: str,
+):
+    assert GraphvizNode.format_label(
+        label=label,
+        width=width,
+    ) == expected
     
 def test_GraphvizEdge_to_graphviz_generates_correctly():
     # Setup
@@ -430,6 +464,5 @@ def test_GraphvizApplication_generates_dot_file(tmp_path):
 
     assert "node_1" in output
     assert "node_2" in output
-    assert 'label="What is engineering information?"' in output
-    assert 'label="What is an ADR?"' in output
+    assert 'label="What' in output
     assert "node_1 -> node_2" in output

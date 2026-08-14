@@ -1,7 +1,10 @@
 from dataclasses import dataclass
 from typing import List
+from textwrap import wrap
 
 from src import Question
+
+DEFAULT_LABEL_WIDTH = 25
 
 @dataclass
 class GraphvizNode:
@@ -28,6 +31,13 @@ class GraphvizNode:
         )
 
     @staticmethod
+    def format_label(
+        label: str,
+        width: int = DEFAULT_LABEL_WIDTH,
+    ) -> str:
+        return "\\n".join(wrap(label, width=width))
+
+    @staticmethod
     def determine_peripheries(question: Question) -> int | None:
         if question.knowledge is None and question.reasoning.status == "complete":
             return 2
@@ -51,7 +61,7 @@ class GraphvizNode:
     def from_question(cls, question: Question) -> "GraphvizNode":
         return cls(
             id=question.id,
-            label=question.question,
+            label=cls.format_label(label=question.question),                             
             shape=cls.determine_shape(question),
             peripheries=cls.determine_peripheries(question),
         )
