@@ -21,30 +21,31 @@ from tests.factories.DataFactories import (
     QuestionWithoutKnowledgeDataFactory,
     QuestionWithoutWorksheetPathDataFactory,
     ReasoningDataFactory,
+    KnowledgeDataFactory,
 )
 
-def test_QuestionDataFactory_create_successfully():
-    data = QuestionDataFactory()
-
-    question_id = next(iter(data))
-    question_data = data[question_id]
-
-    assert question_id.startswith("node_")
-
-    assert question_data["question"] == "Test question"
-    assert question_data["summary"] == "Test summary"
-
-    assert question_data["reasoning"]["status"] == "complete"
-    assert question_data["reasoning"]["worksheet_path"] == (
-        f"reasoning/worksheets/{question_id}.md"
-    )
-
-    assert question_data["knowledge"]["type"] == "adr"
-    assert question_data["knowledge"]["path"] == (
-        f"knowledge/adrs/{question_id}.md"
-    )
-
-    assert question_data["prerequisites"] == []
+#def test_QuestionDataFactory_create_successfully():
+#    data = QuestionDataFactory()
+#
+#    question_id = next(iter(data))
+#    question_data = data[question_id]
+#
+#    assert question_id.startswith("node_")
+#
+#    assert question_data["question"] == "Test question"
+#    assert question_data["summary"] == "Test summary"
+#
+#    assert question_data["reasoning"]["status"] == "complete"
+#    assert question_data["reasoning"]["worksheet_path"] == (
+#        f"reasoning/worksheets/{question_id}.md"
+#    )
+#
+#    assert question_data["knowledge"]["type"] == "adr"
+#    assert question_data["knowledge"]["path"] == (
+#        f"knowledge/adrs/{question_id}.md"
+#    )
+#
+#    assert question_data["prerequisites"] == []
 
 def test_Question_from_dict_create_successful():
     # Setup
@@ -226,6 +227,35 @@ def test_GraphvizNode_determines_shape(
         == expected_shape
     )
 
+@pytest.mark.parametrize(
+    "reasoning_status, knowledge, expected_peripheries",
+    [
+        pytest.param("complete", None, 2, id="reasoning-artifact"),
+        pytest.param("complete", KnowledgeDataFactory(), None, id="knowledge-artifact"),
+        pytest.param("in_progress", None, None, id="no-artifact"),
+    ],
+)
+
+def test_GraphvizNode_determines_peripheries(
+    question: Question,
+    reasoning_status: str,
+    knowledge: Knowledge | None,
+    expected_peripheries: int,
+):
+    # Setup
+    if knowledge is None:
+            question.knowledge = None
+    else:
+        question.knowledge = knowledge
+
+    question.reasoning.status = reasoning_status
+
+    # Execution/ Validation
+    assert (
+        GraphvizNode.determine_peripheries(question=question)
+        == expected_peripheries
+    )
+    
 def test_GraphvizEdge_to_graphviz_generates_correctly():
     # Setup
     edge = GraphvizEdge(

@@ -8,14 +8,32 @@ class GraphvizNode:
     id: str
     label: str
     shape: str
+    peripheries: int | None = None
 
     def to_graphviz(self) -> str:
-        return (f'{self.id} [\n'
-            f'    label="{self.label}"\n'
-            f'    shape={self.shape}\n'
-            f']'
+        attributes = [
+            f'    label="{self.label}"',
+            f'    shape={self.shape}',
+        ]
+
+        if self.peripheries is not None:
+            attributes.append(
+                f"    peripheries={self.peripheries}"
+            )
+
+        return (
+            f"{self.id} [\n"
+            + "\n".join(attributes)
+            + "\n]"
         )
 
+    @staticmethod
+    def determine_peripheries(question: Question) -> int | None:
+        if question.knowledge is None and question.reasoning.status == "complete":
+            return 2
+        
+        return None
+    
     @staticmethod
     def determine_shape(question: Question) -> str:
         if question.knowledge is None:
@@ -35,6 +53,7 @@ class GraphvizNode:
             id=question.id,
             label=question.question,
             shape=cls.determine_shape(question),
+            peripheries=cls.determine_peripheries(question),
         )
 
 @dataclass

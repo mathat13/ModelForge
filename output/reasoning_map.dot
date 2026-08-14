@@ -43,6 +43,7 @@ engineering_reasoning_phases [
 kb_organization [
     label="How should the knowledge base be organized?"
     shape=oval
+    peripheries=2
 ]
 information_authority [
     label="What is the authoritative source for each engineering information type?"
