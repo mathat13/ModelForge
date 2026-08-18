@@ -1,11 +1,11 @@
 from pathlib import Path
 
-from question_translator.infrastructure.YAMLParser import YAMLParser
-from question_translator.infrastructure.GraphvizConfigLoader import GraphvizConfigLoader
-from question_translator.infrastructure.GraphvizFileWriter import GraphvizFileWriter
-from question_translator.GraphvizRenderer import GraphvizRenderer
-from question_translator.Graph import GraphvizGraph
-from question_translator.Question import Question
+from question_translator.infrastructure.yaml_parser import YAMLParser
+from question_translator.infrastructure.graphviz.config_loader import GraphvizConfigLoader
+from question_translator.infrastructure.file_writer import GraphvizFileWriter
+from question_translator.application.graphviz.renderer import GraphvizRenderer
+from question_translator.representation.graphviz.graph import GraphvizGraph
+from question_translator.domain.question import Question
 
 
 class GraphvizApplication:

@@ -1,15 +1,8 @@
 from typing import List
-from dataclasses import dataclass
+from dataclasses import dataclass        
 
-@dataclass
-class Reasoning:
-    status: str
-    worksheet_path: str | None
-
-@dataclass
-class Knowledge:
-    type: str
-    path: str           
+from question_translator.domain.knowledge import Knowledge
+from question_translator.domain.reasoning import Reasoning
 
 @dataclass
 class Question:

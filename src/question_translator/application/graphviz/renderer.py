@@ -1,9 +1,7 @@
 from dataclasses import dataclass
 
-from question_translator.Graph import (
-    GraphvizGraph,
-    GraphvizConfig,
-)
+from question_translator.representation.graphviz.graph import GraphvizGraph
+from question_translator.representation.graphviz.config import GraphvizConfig
 
 class GraphvizRenderer:
     def render(

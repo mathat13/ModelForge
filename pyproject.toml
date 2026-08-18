@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-question-translator = "question_translator.cli:main"
+question-translator = "question_translator.presentation.cli:main"
 
 [build-system]
 requires = ["uv_build>=0.12.5,<0.13.0"]

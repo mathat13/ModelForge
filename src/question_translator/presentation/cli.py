@@ -2,7 +2,7 @@ from pathlib import Path
 
 import typer
 
-from question_translator.GraphvizApplication import GraphvizApplication
+from question_translator.application.graphviz.application import GraphvizApplication
 
 app = typer.Typer()
 
