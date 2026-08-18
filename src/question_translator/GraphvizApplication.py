@@ -1,11 +1,11 @@
 from pathlib import Path
 
-from src.infrastructure.YAMLParser import YAMLParser
-from src.infrastructure.GraphvizConfigLoader import GraphvizConfigLoader
-from src.infrastructure.GraphvizFileWriter import GraphvizFileWriter
-from src.GraphvizRenderer import GraphvizRenderer
-from src.Graph import GraphvizGraph
-from src.Question import Question
+from question_translator.infrastructure.YAMLParser import YAMLParser
+from question_translator.infrastructure.GraphvizConfigLoader import GraphvizConfigLoader
+from question_translator.infrastructure.GraphvizFileWriter import GraphvizFileWriter
+from question_translator.GraphvizRenderer import GraphvizRenderer
+from question_translator.Graph import GraphvizGraph
+from question_translator.Question import Question
 
 
 class GraphvizApplication:

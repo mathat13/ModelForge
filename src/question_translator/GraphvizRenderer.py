@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from src.Graph import (
+from question_translator.Graph import (
     GraphvizGraph,
     GraphvizConfig,
 )

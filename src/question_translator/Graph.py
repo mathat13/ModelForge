@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import List
 from textwrap import wrap
 
-from src import Question
+from question_translator.Question import Question
 
 DEFAULT_LABEL_WIDTH = 25
 

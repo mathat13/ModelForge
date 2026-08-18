@@ -1,7 +1,8 @@
 from pathlib import Path
-from src.Graph import GraphvizConfig
+from question_translator.Graph import GraphvizConfig
 
 class GraphvizConfigLoader:
+
     @staticmethod
     def load(
         header_path: Path,

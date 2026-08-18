@@ -1,19 +1,19 @@
 import pytest
 from typing import List
 
-from src import (
+from question_translator import (
     Question,
-    Reasoning,
-    Knowledge,
+    GraphvizRenderer,
+    GraphvizApplication,
+    GraphvizConfig,
+    GraphvizConfigLoader,
+    GraphvizEdge,
+    GraphvizFileWriter,
     GraphvizGraph,
     GraphvizNode,
-    GraphvizEdge,
-    GraphvizRenderer,
-    GraphvizConfig,
-    YAMLParser,
-    GraphvizConfigLoader,
-    GraphvizFileWriter,
-    GraphvizApplication,
+    Knowledge,
+    Reasoning,
+    YAMLParser
 )
 
 from tests.factories.DataFactories import (
