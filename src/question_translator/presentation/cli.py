@@ -7,26 +7,24 @@ from question_translator.application.graphviz.application import GraphvizApplica
 app = typer.Typer()
 
 
+@app.callback()
+def main():
+    """Translate knowledge-base YAML into Graphviz representations."""
+    pass
+
 @app.command()
 def generate(
-    source: Path,
+    source: Path = typer.Argument(...),
 ):
     application = GraphvizApplication()
-
-    """
-    Shoot the portal gun
-    """
-    typer.echo("Shooting portal gun")
     
-    #application.generate(
-    #    yaml_path=source,
-    #    # other paths/configuration will go here
-    #)
-
-
-def main() -> None:
-    app()
+    application.generate(
+        yaml_path=source,
+        header_path=source,
+        footer_path=source,
+        output_path=source,
+    )
 
 
 if __name__ == "__main__":
-    main()
+    app()
