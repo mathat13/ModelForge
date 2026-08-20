@@ -1,4 +1,0 @@
-pyyaml
-factory_boy
-typer
-pytest
