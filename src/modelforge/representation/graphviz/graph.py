@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from typing import List
 from textwrap import wrap
 
-from question_translator.domain.question import Question
-from question_translator.representation.graphviz.node import GraphvizNode
-from question_translator.representation.graphviz.edge import GraphvizEdge
+from modelforge.domain.question import Question
+from modelforge.representation.graphviz.node import GraphvizNode
+from modelforge.representation.graphviz.edge import GraphvizEdge
 
 
 

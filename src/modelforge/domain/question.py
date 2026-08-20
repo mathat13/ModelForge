@@ -1,8 +1,8 @@
 from typing import List
 from dataclasses import dataclass        
 
-from question_translator.domain.knowledge import Knowledge
-from question_translator.domain.reasoning import Reasoning
+from modelforge.domain.knowledge import Knowledge
+from modelforge.domain.reasoning import Reasoning
 
 @dataclass
 class Question:

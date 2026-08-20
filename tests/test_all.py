@@ -1,7 +1,7 @@
 import pytest
 from typing import List
 
-from question_translator import (
+from modelforge import (
     Question,
     GraphvizRenderer,
     GraphvizApplication,

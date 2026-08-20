@@ -1,11 +1,11 @@
 from pathlib import Path
 
-from question_translator.infrastructure.yaml_parser import YAMLParser
-from question_translator.infrastructure.graphviz.config_loader import GraphvizConfigLoader
-from question_translator.infrastructure.file_writer import GraphvizFileWriter
-from question_translator.application.graphviz.renderer import GraphvizRenderer
-from question_translator.representation.graphviz.graph import GraphvizGraph
-from question_translator.domain.question import Question
+from modelforge.infrastructure.yaml_parser import YAMLParser
+from modelforge.infrastructure.graphviz.config_loader import GraphvizConfigLoader
+from modelforge.infrastructure.file_writer import GraphvizFileWriter
+from modelforge.application.graphviz.renderer import GraphvizRenderer
+from modelforge.representation.graphviz.graph import GraphvizGraph
+from modelforge.domain.question import Question
 
 
 class GraphvizApplication:

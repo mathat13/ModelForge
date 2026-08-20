@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from textwrap import wrap
 
-from question_translator.domain.question import Question
+from modelforge.domain.question import Question
 
 DEFAULT_LABEL_WIDTH = 25
 

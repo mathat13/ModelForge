@@ -2,7 +2,7 @@ from pathlib import Path
 
 import typer
 
-from question_translator.application.graphviz.application import GraphvizApplication
+from modelforge.application.graphviz.application import GraphvizApplication
 
 app = typer.Typer()
 
@@ -15,14 +15,17 @@ def main():
 @app.command()
 def generate(
     source: Path = typer.Argument(...),
+    header: Path = typer.Option(..., "--header"),
+    footer: Path = typer.Option(..., "--footer"),
+    output: Path = typer.Option(..., "--output"),
 ):
     application = GraphvizApplication()
     
     application.generate(
         yaml_path=source,
-        header_path=source,
-        footer_path=source,
-        output_path=source,
+        header_path=header,
+        footer_path=footer,
+        output_path=output,
     )
 
 

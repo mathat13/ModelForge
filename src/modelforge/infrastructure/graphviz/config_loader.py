@@ -1,5 +1,5 @@
 from pathlib import Path
-from question_translator.representation.graphviz.config import GraphvizConfig
+from modelforge.representation.graphviz.config import GraphvizConfig
 
 class GraphvizConfigLoader:
 

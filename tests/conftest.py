@@ -2,7 +2,7 @@ import pytest
 from typing import List
 
 from tests.factories.DataFactories import QuestionDataFactory
-from question_translator import Question
+from modelforge import Question
 
 
 @pytest.fixture

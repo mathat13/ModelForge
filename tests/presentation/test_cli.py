@@ -1,8 +1,10 @@
+import pytest
+
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 from typer.testing import CliRunner
 
-from question_translator.presentation.cli import app
+from modelforge.presentation.cli import app
 
 runner = CliRunner()
 
@@ -12,37 +14,54 @@ def test_cli_exposes_generate_command():
     assert result.exit_code == 0
     assert "generate" in result.stdout
 
-def test_generate_requires_source():
-    result = runner.invoke(app, ["generate"])
-
-    assert result.exit_code != 0
-
 def test_generate_exposes_source_argument():
     result = runner.invoke(app, ["generate", "--help"])
 
     assert result.exit_code == 0
     assert "source" in result.stdout
 
-def test_generate_passes_source_to_application():
+@pytest.mark.parametrize(
+    "arguments",
+    [
+        pytest.param(["generate"], id="command_only"),
+        pytest.param(["generate", "source.yaml"], id="command+source"),
+        pytest.param(["generate", "source.yaml", "--header", "header.dot"], id="command+source+header"),
+        pytest.param(["generate", "source.yaml", "--header", "header.dot", "--footer", "footer.dot"],
+                     id="comand+source+header+footer"
+                     ),
+    ],
+)
+def test_generate_requires_all_arguments(arguments):
+    result = runner.invoke(app, arguments)
+
+    assert result.exit_code != 0
+
+def test_generate_passes_arguments_to_application():
     mock_application = MagicMock()
 
     with patch(
-        "question_translator.presentation.cli.GraphvizApplication",
+        "modelforge.presentation.cli.GraphvizApplication",
         return_value=mock_application,
     ):
         result = runner.invoke(
             app,
-            ["generate", "source.yaml"],
+            [
+                "generate",
+                "source.yaml",
+                "--header", "header.dot",
+                "--footer", "footer.dot",
+                "--output", "graph.dot",
+            ],
         )
 
     assert result.exit_code == 0
 
-    mock_application.generate.assert_called_once()
-
-    call = mock_application.generate.call_args
-
-    assert call.kwargs["yaml_path"] == Path("source.yaml")
-
+    mock_application.generate.assert_called_once_with(
+        yaml_path=Path("source.yaml"),
+        header_path=Path("header.dot"),
+        footer_path=Path("footer.dot"),
+        output_path=Path("graph.dot"),
+    )
 
 def test_generate_returns_error_when_command_is_invalid():
     result = runner.invoke(

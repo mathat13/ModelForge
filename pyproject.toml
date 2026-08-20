@@ -1,5 +1,5 @@
 [project]
-name = "question-translator"
+name = "modelforge"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-question-translator = "question_translator.presentation.cli:main"
+modelforge = "modelforge.presentation.cli:main"
 
 [build-system]
 requires = ["uv_build>=0.12.5,<0.13.0"]
