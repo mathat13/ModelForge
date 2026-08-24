@@ -1,7 +1,7 @@
 [project]
-name = "modelforge"
-version = "0.1.0"
-description = "Add your description here"
+name = "blueprint-forge"
+version = "0.1.1"
+description = "..."
 readme = "README.md"
 authors = [
     { name = "mathat13", email = "lovell.jwz@gmail.com" }
@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-modelforge = "modelforge.presentation.cli:main"
+blueprint-forge = "blueprint_forge.presentation.cli:main"
 
 [build-system]
 requires = ["uv_build>=0.12.5,<0.13.0"]
@@ -24,3 +24,9 @@ dev = [
     "factory-boy>=3.3.3",
     "pytest>=9.1.1",
 ]
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true

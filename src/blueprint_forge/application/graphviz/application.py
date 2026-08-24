@@ -1,11 +1,11 @@
 from pathlib import Path
 
-from modelforge.infrastructure.yaml_parser import YAMLParser
-from modelforge.infrastructure.graphviz.config_loader import GraphvizConfigLoader
-from modelforge.infrastructure.file_writer import GraphvizFileWriter
-from modelforge.application.graphviz.renderer import GraphvizRenderer
-from modelforge.representation.graphviz.graph import GraphvizGraph
-from modelforge.domain.question import Question
+from blueprint_forge.infrastructure.yaml_parser import YAMLParser
+from blueprint_forge.infrastructure.graphviz.config_loader import GraphvizConfigLoader
+from blueprint_forge.infrastructure.file_writer import GraphvizFileWriter
+from blueprint_forge.application.graphviz.renderer import GraphvizRenderer
+from blueprint_forge.representation.graphviz.graph import GraphvizGraph
+from blueprint_forge.domain.question import Question
 
 
 class GraphvizApplication:

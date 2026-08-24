@@ -1,4 +1,4 @@
-from modelforge import (
+from blueprint_forge import (
     Question,
     Knowledge,
     Reasoning,

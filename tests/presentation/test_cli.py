@@ -4,7 +4,7 @@ from pathlib import Path
 from unittest.mock import MagicMock, patch
 from typer.testing import CliRunner
 
-from modelforge.presentation.cli import app
+from blueprint_forge.presentation.cli import app
 
 runner = CliRunner()
 
@@ -40,7 +40,7 @@ def test_generate_passes_arguments_to_application():
     mock_application = MagicMock()
 
     with patch(
-        "modelforge.presentation.cli.GraphvizApplication",
+        "blueprint_forge.presentation.cli.GraphvizApplication",
         return_value=mock_application,
     ):
         result = runner.invoke(

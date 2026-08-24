@@ -11,7 +11,7 @@ from .infrastructure.file_writer import GraphvizFileWriter
 from .infrastructure.yaml_parser import YAMLParser
 from .infrastructure.graphviz.config_loader import GraphvizConfigLoader
 
-# Add presentation import if required
+from .presentation.cli import *
 
 from .application.graphviz.renderer import GraphvizRenderer
 from .application.graphviz.application import GraphvizApplication

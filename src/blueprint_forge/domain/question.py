@@ -1,8 +1,8 @@
 from typing import List
 from dataclasses import dataclass        
 
-from modelforge.domain.knowledge import Knowledge
-from modelforge.domain.reasoning import Reasoning
+from blueprint_forge.domain.knowledge import Knowledge
+from blueprint_forge.domain.reasoning import Reasoning
 
 @dataclass
 class Question:

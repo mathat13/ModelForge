@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from modelforge.representation.graphviz.graph import GraphvizGraph
-from modelforge.representation.graphviz.config import GraphvizConfig
+from blueprint_forge.representation.graphviz.graph import GraphvizGraph
+from blueprint_forge.representation.graphviz.config import GraphvizConfig
 
 class GraphvizRenderer:
     def render(

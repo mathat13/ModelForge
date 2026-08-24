@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from typing import List
 from textwrap import wrap
 
-from modelforge.domain.question import Question
-from modelforge.representation.graphviz.node import GraphvizNode
-from modelforge.representation.graphviz.edge import GraphvizEdge
+from blueprint_forge.domain.question import Question
+from blueprint_forge.representation.graphviz.node import GraphvizNode
+from blueprint_forge.representation.graphviz.edge import GraphvizEdge
 
 
 

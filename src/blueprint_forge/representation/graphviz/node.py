@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from textwrap import wrap
 
-from modelforge.domain.question import Question
+from blueprint_forge.domain.question import Question
 
 DEFAULT_LABEL_WIDTH = 25
 

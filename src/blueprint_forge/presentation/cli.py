@@ -2,13 +2,13 @@ from pathlib import Path
 
 import typer
 
-from modelforge.application.graphviz.application import GraphvizApplication
+from blueprint_forge.application.graphviz.application import GraphvizApplication
 
 app = typer.Typer()
 
 
 @app.callback()
-def main():
+def cli():
     """Translate knowledge-base YAML into Graphviz representations."""
     pass
 
@@ -29,5 +29,8 @@ def generate(
     )
 
 
+def main() -> None:
+    app()
+    
 if __name__ == "__main__":
     app()

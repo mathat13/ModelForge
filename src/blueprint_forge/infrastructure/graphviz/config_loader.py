@@ -1,5 +1,5 @@
 from pathlib import Path
-from modelforge.representation.graphviz.config import GraphvizConfig
+from blueprint_forge.representation.graphviz.config import GraphvizConfig
 
 class GraphvizConfigLoader:
 

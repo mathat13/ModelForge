@@ -1,6 +1,6 @@
 from typing import List
 
-from modelforge import (
+from blueprint_forge import (
     Question,
     GraphvizRenderer,
     GraphvizApplication,
