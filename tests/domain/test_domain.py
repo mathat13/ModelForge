@@ -5,15 +5,15 @@ from blueprint_forge import (
 )
 
 from tests.factories.DataFactories import (
-    QuestionDataFactory,
-    QuestionWithoutKnowledgeDataFactory,
-    QuestionWithoutWorksheetPathDataFactory,
     ReasoningDataFactory,
+    QuestionYamlFactory,
+    QuestionYamlWithoutKnowledgeFactory,
+    QuestionYamlWithoutWorksheetPathFactory,
 )
 
 def test_Question_from_dict_create_successful():
     # Setup
-    data = QuestionDataFactory()
+    data = QuestionYamlFactory()
     question_id, question_data = next(iter(data.items()))
 
     # Execution
@@ -39,7 +39,7 @@ def test_Question_from_dict_create_successful():
 
 def test_question_from_dict_none_knowledge_section_generation():
     # Setup
-    data = QuestionDataFactory(knowledge=None)
+    data = QuestionYamlFactory(knowledge=None)
     question_id, question_data = next(iter(data.items()))
 
     # Execution
@@ -63,7 +63,7 @@ def test_question_from_dict_none_knowledge_section_generation():
 
 def test_question_from_dict_absent_knowledge_section_generation():
     # Setup
-    data = QuestionWithoutKnowledgeDataFactory()
+    data = QuestionYamlWithoutKnowledgeFactory()
     question_id, question_data = next(iter(data.items()))
 
     # Execution
@@ -87,7 +87,7 @@ def test_question_from_dict_absent_knowledge_section_generation():
 
 def test_question_from_dict_absent_worksheet_path_generation():
     # Setup
-        data = QuestionWithoutWorksheetPathDataFactory()
+        data = QuestionYamlWithoutWorksheetPathFactory()
 
         question_id, question_data = next(iter(data.items()))
     
@@ -114,7 +114,7 @@ def test_question_from_dict_absent_worksheet_path_generation():
 
 def test_question_from_dict_none_worksheet_path_generation():
     # Setup
-        data = QuestionDataFactory(
+        data = QuestionYamlFactory(
             reasoning=ReasoningDataFactory(
                 worksheet_path=None
             )

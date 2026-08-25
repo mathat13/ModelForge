@@ -15,3 +15,4 @@ from .presentation.cli import *
 
 from .application.graphviz.renderer import GraphvizRenderer
 from .application.graphviz.application import GraphvizApplication
+from .application.inputs import QuestionData

@@ -3,13 +3,7 @@ from faker import Faker
 
 fake = Faker()
 
-class ReasoningDataFactory(factory.DictFactory):
-    status = "complete"
-    worksheet_path = "reasoning/worksheets/test.md"
-
-class KnowledgeDataFactory(factory.DictFactory):
-    type = "adr"
-    path = "knowledge/adrs/test.md"
+#--- Helper functions ---
 
 def prerequisites_for(node_id: str) -> list[str]:
     number = int(node_id.split("_")[1])
@@ -19,7 +13,17 @@ def prerequisites_for(node_id: str) -> list[str]:
         for i in range(max(0, number - 3), number)
     ]
 
-class QuestionDataFactory(factory.DictFactory):
+#--- Base Factories ---
+
+class ReasoningDataFactory(factory.DictFactory):
+    status = "complete"
+    worksheet_path = "reasoning/worksheets/test.md"
+
+class KnowledgeDataFactory(factory.DictFactory):
+    type = "adr"
+    path = "knowledge/adrs/test.md"
+
+class QuestionYamlFactory(factory.DictFactory):
     id = factory.Sequence(lambda n: f"node_{n}")
 
     question = "Test question"
@@ -51,7 +55,29 @@ class QuestionDataFactory(factory.DictFactory):
             question_id: values
         }
 
-class QuestionWithoutKnowledgeDataFactory(QuestionDataFactory):
+class QuestionDataFactory(factory.DictFactory):
+    question = "Test question"
+    summary = "Test summary"
+
+    reasoning = factory.LazyFunction(
+        lambda: ReasoningDataFactory(
+        worksheet_path=f"reasoning/worksheets/question_id.md"
+        )
+    )
+
+    knowledge = factory.LazyFunction(
+        lambda: KnowledgeDataFactory(
+            path=f"knowledge/adrs/question_id.md"
+            )
+    )
+
+    prerequisites = factory.LazyFunction(
+    lambda: ["node_1", "node_2"]
+    )
+
+#--- QuestionYaml derivatives ---
+
+class QuestionYamlWithoutKnowledgeFactory(QuestionYamlFactory):
 
     @classmethod
     def _build(cls, model_class, *args, **kwargs):
@@ -62,7 +88,7 @@ class QuestionWithoutKnowledgeDataFactory(QuestionDataFactory):
 
         return values
 
-class QuestionWithoutWorksheetPathDataFactory(QuestionDataFactory):
+class QuestionYamlWithoutWorksheetPathFactory(QuestionYamlFactory):
 
     @classmethod
     def _build(cls, model_class, *args, **kwargs):
@@ -70,5 +96,57 @@ class QuestionWithoutWorksheetPathDataFactory(QuestionDataFactory):
 
         question_id = next(iter(values))
         values[question_id]["reasoning"].pop("worksheet_path", None)
+
+        return values
+
+#--- QuestionData derivatives ---
+
+class QuestionDataWithoutReasoningFactory(QuestionDataFactory):
+
+    @classmethod
+    def _build(cls, model_class, *args, **kwargs):
+        values = super()._build(model_class, *args, **kwargs)
+
+        values.pop("reasoning", None)
+
+        return values
+
+class QuestionDataWithoutReasoningStatusFactory(QuestionDataFactory):
+
+    @classmethod
+    def _build(cls, model_class, *args, **kwargs):
+        values = super()._build(model_class, *args, **kwargs)
+
+        values["reasoning"].pop("status", None)
+
+        return values
+
+class QuestionDataWithoutWorksheetPathFactory(QuestionDataFactory):
+
+    @classmethod
+    def _build(cls, model_class, *args, **kwargs):
+        values = super()._build(model_class, *args, **kwargs)
+
+        values["reasoning"].pop("worksheet_path", None)
+
+        return values
+    
+class QuestionDataWithoutQuestionFactory(QuestionDataFactory):
+
+    @classmethod
+    def _build(cls, model_class, *args, **kwargs):
+        values = super()._build(model_class, *args, **kwargs)
+
+        values.pop("question", None)
+
+        return values
+
+class QuestionDataWithoutSummaryFactory(QuestionDataFactory):
+
+    @classmethod
+    def _build(cls, model_class, *args, **kwargs):
+        values = super()._build(model_class, *args, **kwargs)
+
+        values.pop("summary", None)
 
         return values

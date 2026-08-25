@@ -1,13 +1,13 @@
 import pytest
 from typing import List
 
-from tests.factories.DataFactories import QuestionDataFactory
+from tests.factories.DataFactories import QuestionYamlFactory
 from blueprint_forge import Question
 
 
 @pytest.fixture
 def questions() -> List[Question]:
-    data = QuestionDataFactory.create_batch(5)
+    data = QuestionYamlFactory.create_batch(5)
 
     return [
         Question.from_dict(
@@ -20,7 +20,7 @@ def questions() -> List[Question]:
 
 @pytest.fixture
 def question() -> "Question":
-    data = QuestionDataFactory()
+    data = QuestionYamlFactory()
     question_id, question_data = next(iter(data.items()))
 
     return Question.from_dict(
