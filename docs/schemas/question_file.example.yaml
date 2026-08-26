@@ -1,0 +1,40 @@
+questions:
+  # Completed reasoning with worksheet and  distilled knowledge artifact
+  question_1:
+    question: "What is engineering information?"
+    summary: "..."
+    reasoning:
+      status: "complete"
+      worksheet_path: "reasoning/worksheets/question_1.md"
+    knowledge:
+      type: "classification"
+      path: "knowledge/classifications/question_1.md"
+    prerequisites: []
+  # Reasoning completed, no worksheet, distilled knowledge artifact
+  question_2:
+    question: "How will the knowledge base top-level directory be organized?"
+    summary: "..."
+    reasoning:
+      status: "complete"
+    knowledge:
+      type: "adr"
+      path: "knowledge/adrs/0003-question_2.md"
+    prerequisites: []
+  # Reasoning in progress, no knowledge artifact, no worksheet
+  question_3:
+    question: "How will we split engineering information between the repository and the knowledge base?"
+    summary: "..."
+    reasoning:
+      status: "in_progress"
+    prerequisites:
+      - question_1
+  # Reasoning completed, no knowledge artifact
+  question_4:
+    question: "What is a knowledge base?"
+    summary: "..."
+    reasoning:
+      status: "complete"
+      worksheet_path: "reasoning/worksheets/question_4.md"
+    prerequisites: []
+  
+    
