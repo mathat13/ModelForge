@@ -26,7 +26,7 @@ reasoning                   object            null / absent
 reasoning.status            string            null / absent
 reasoning.worksheet_path    string / absent   wrong type
 knowledge                   object / absent   malformed
-prerequisites               list[str]         wrong type
+prerequisites               list[str]/ []     wrong type
 extra fields                --                forbidden
 '''
 
@@ -92,7 +92,7 @@ def test_QuestionData_raises_ValidationError_on_incorrect_field_types(data):
 
 def test_QuestionData_accepts_valid_prerequisites(data):
     QuestionData.model_validate(data)
-    
+
 @pytest.mark.parametrize(
     "data",
     [

@@ -1,12 +1,15 @@
 from pathlib import Path
 
-from blueprint_forge.infrastructure.yaml_parser import YAMLParser
-from blueprint_forge.infrastructure.graphviz.config_loader import GraphvizConfigLoader
-from blueprint_forge.infrastructure.file_writer import GraphvizFileWriter
-from blueprint_forge.application.graphviz.renderer import GraphvizRenderer
-from blueprint_forge.representation.graphviz.graph import GraphvizGraph
-from blueprint_forge.domain.question import Question
+from blueprint_forge import (
+    YAMLParser,
+    GraphvizConfigLoader,
+    GraphvizFileWriter,
+    GraphvizGraph,
+    Question,
+)
 
+from blueprint_forge.application.graphviz.renderer import GraphvizRenderer
+from blueprint_forge.application.inputs import QuestionData
 
 class GraphvizApplication:
     def __init__(self):
@@ -23,15 +26,22 @@ class GraphvizApplication:
         data = YAMLParser.parse(yaml_path)
         question_dict = data["questions"]
 
-        # Construct domain objects
-        questions = [
-            Question.from_dict(
-                id=question_id,
-                data=question_data,
-            )
-            for question_id, question_data in question_dict.items()
-        ]
+        
+        questions = []
 
+        for question_id, question_data in question_dict.items():
+            
+            # Validate question_data
+            validated_data = QuestionData.model_validate(question_data)
+
+            # Add domain object to list
+            questions.append(
+                Question.from_dict(
+                    id=question_id,
+                    data=validated_data.model_dump(),
+                )
+            )
+            
         # Construct Graphviz representation
         graph = GraphvizGraph.from_questions(questions)
 
