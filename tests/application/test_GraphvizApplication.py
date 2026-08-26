@@ -1,6 +1,9 @@
+import pytest
+from pydantic import ValidationError
+
 from blueprint_forge import GraphvizApplication
 
-def test_GraphvizApplication_generates_dot_file(tmp_path):
+def test_GraphvizApplication_generates_dot_file_on_valid_data(tmp_path):
     # Setup
     yaml_path = tmp_path / "questions.yaml"
     header_path = tmp_path / "header.dot"
@@ -60,3 +63,55 @@ def test_GraphvizApplication_generates_dot_file(tmp_path):
     assert "node_2" in output
     assert 'label="What' in output
     assert "node_1 -> node_2" in output
+
+def test_application_rejects_invalid_question_data(tmp_path):
+    # Setup
+    yaml_path = tmp_path / "questions.yaml"
+    header_path = tmp_path / "header.dot"
+    footer_path = tmp_path / "footer.dot"
+    output_path = tmp_path / "output.dot"
+
+    yaml_path.write_text(
+        """
+        questions:
+            node_1:
+                question: "What is engineering information?"
+                summary: "Test summary"
+                reasoning:
+                    status: 123
+                    worksheet_path: "reasoning/test.md"
+                knowledge:
+                    type: "adr"
+                    path: "knowledge/test.md"
+                prerequisites: []
+
+            node_2:
+                question: "What is an ADR?"
+                summary: "Test summary"
+                reasoning:
+                    status: "complete"
+                    worksheet_path: "reasoning/test2.md"
+                knowledge:
+                    type: "adr"
+                    path: "knowledge/test2.md"
+                prerequisites:
+                    - node_1
+        """
+    )
+
+    header_path.write_text("HEADER")
+    footer_path.write_text("FOOTER")
+
+    application = GraphvizApplication()
+
+    # Execution
+    with pytest.raises(ValidationError):
+        application.generate(
+            yaml_path=yaml_path,
+            header_path=header_path,
+            footer_path=footer_path,
+            output_path=output_path,
+        )
+
+    # Validation
+    assert not output_path.exists()
