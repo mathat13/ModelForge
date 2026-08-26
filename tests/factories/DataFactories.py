@@ -111,6 +111,16 @@ class QuestionDataWithoutReasoningFactory(QuestionDataFactory):
 
         return values
 
+class QuestionDataWithoutKnowledgeFactory(QuestionDataFactory):
+
+    @classmethod
+    def _build(cls, model_class, *args, **kwargs):
+        values = super()._build(model_class, *args, **kwargs)
+
+        values.pop("knowledge", None)
+
+        return values
+
 class QuestionDataWithoutReasoningStatusFactory(QuestionDataFactory):
 
     @classmethod
