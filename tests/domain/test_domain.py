@@ -11,6 +11,29 @@ from tests.factories.DataFactories import (
     QuestionYamlWithoutWorksheetPathFactory,
 )
 
+'''
+Question Contract
+
+Field / relationship            Valid                   Invalid
+---------------------------------------------------------------------------
+id                              non-empty string            wrong type/ empty
+reasoning.status = complete     knowledge may exist         —
+reasoning.status = in_progress  knowledge must be None      knowledge exists
+
+
+Reasoning Contract
+
+Field / relationship            Valid                   Invalid
+---------------------------------------------------------------------------
+reasoning.status                "in_progress" / "complete"  wrong string
+
+Knowledge Contract
+
+Field / relationship            Valid                   Invalid
+---------------------------------------------------------------------------
+knowledge.type                  "adr"/ "classification"     wrong string
+'''
+
 def test_Question_from_dict_create_successful():
     # Setup
     data = QuestionYamlFactory()

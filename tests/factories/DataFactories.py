@@ -111,16 +111,6 @@ class QuestionDataWithoutReasoningFactory(QuestionDataFactory):
 
         return values
 
-class QuestionDataWithoutKnowledgeFactory(QuestionDataFactory):
-
-    @classmethod
-    def _build(cls, model_class, *args, **kwargs):
-        values = super()._build(model_class, *args, **kwargs)
-
-        values.pop("knowledge", None)
-
-        return values
-
 class QuestionDataWithoutReasoningStatusFactory(QuestionDataFactory):
 
     @classmethod
@@ -138,6 +128,36 @@ class QuestionDataWithoutWorksheetPathFactory(QuestionDataFactory):
         values = super()._build(model_class, *args, **kwargs)
 
         values["reasoning"].pop("worksheet_path", None)
+
+        return values
+
+class QuestionDataWithoutKnowledgeFactory(QuestionDataFactory):
+
+    @classmethod
+    def _build(cls, model_class, *args, **kwargs):
+        values = super()._build(model_class, *args, **kwargs)
+
+        values.pop("knowledge", None)
+
+        return values
+
+class QuestionDataWithoutKnowledgePathFactory(QuestionDataFactory):
+
+    @classmethod
+    def _build(cls, model_class, *args, **kwargs):
+        values = super()._build(model_class, *args, **kwargs)
+
+        values["knowledge"].pop("path", None)
+
+        return values
+
+class QuestionDataWithoutKnowledgeTypeFactory(QuestionDataFactory):
+
+    @classmethod
+    def _build(cls, model_class, *args, **kwargs):
+        values = super()._build(model_class, *args, **kwargs)
+
+        values["knowledge"].pop("type", None)
 
         return values
     

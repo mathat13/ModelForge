@@ -1,0 +1,80 @@
+question:
+  valid:
+    - string
+  invalid:
+    - null
+    - absent
+    - non-string
+
+summary:
+  valid:
+    - string
+  invalid:
+    - null
+    - absent
+    - non-string
+
+reasoning:
+  valid:
+    - object
+  invalid:
+    - null
+    - absent
+
+reasoning.status:
+  valid:
+    - string
+  invalid:
+    - null
+    - absent
+    - non-string
+
+reasoning.worksheet_path:
+  valid:
+    - string
+    - null
+    - absent
+  invalid:
+    - non-string
+
+knowledge:
+  valid:
+    - object
+    - null
+    - absent
+  invalid: []
+
+knowledge.type:
+  valid:
+    - string
+  invalid:
+    - non-string
+    - absent when knowledge present
+    - null when knowledge present
+  impossible:
+    - null when no knowledge present (impossible)
+    - absent when no knowledge present (impossible)
+
+knowledge.path:
+  valid:
+    - string
+    - null when no knowledge present
+    - absent when no knowledge present
+  invalid:
+    - non-string
+    - absent when knowledge present
+    - null when knowledge present
+
+prerequisites:
+  valid:
+    - list[str]
+    - empty list
+  invalid:
+    - non-list
+    - non-string list elements
+    - mixed list element types
+
+extra_fields:
+  valid: []
+  invalid:
+    - forbidden
