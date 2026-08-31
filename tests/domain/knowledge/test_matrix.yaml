@@ -1,0 +1,7 @@
+knowledge.type:
+  valid:
+    - "adr"
+    - "classification"
+  invalid:
+    - non-valid string
+    - empty string

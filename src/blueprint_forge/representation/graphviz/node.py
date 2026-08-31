@@ -48,13 +48,15 @@ class GraphvizNode:
         if question.knowledge is None:
             return "oval"
 
-        if question.knowledge.type == "adr":
-            return "box"
+        else:
+            if question.knowledge.type == "adr":
+                return "box"
 
-        if question.knowledge.type == "classification":
-            return "diamond"
+            elif question.knowledge.type == "classification":
+                return "diamond"
 
-        return "oval"
+            else:
+                return "oval"
 
     @classmethod
     def from_question(cls, question: Question) -> "GraphvizNode":

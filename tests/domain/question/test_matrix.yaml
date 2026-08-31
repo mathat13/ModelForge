@@ -1,0 +1,16 @@
+id:
+  valid:
+    - non-empty string
+  invalid:
+    - non-string
+    - empty string
+reasoning.status=complete:
+  valid:
+    - knowledge may exist
+  invalid:
+
+reasoning.status=in_progress:
+  valid:
+    - knowledge must be None
+  invalid:
+    - knowledge exists

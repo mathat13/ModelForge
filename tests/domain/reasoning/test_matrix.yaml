@@ -1,0 +1,7 @@
+reasoning.status:
+  valid:
+    - "in_progress"
+    - "complete"
+  invalid:
+    - non-valid string
+    - empty string

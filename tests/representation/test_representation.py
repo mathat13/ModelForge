@@ -11,6 +11,8 @@ from blueprint_forge import (
 
 from tests.factories.DataFactories import (
     KnowledgeDataFactory,
+    QuestionYamlFactory,
+    QuestionYamlWithoutKnowledgeFactory,
 )
 
 def test_GraphvizNode_generates_from_question_correctly(question: Question):
@@ -38,24 +40,25 @@ def test_GraphvizNode_to_graphviz_generates_correctly(question: Question):
     )
 
 @pytest.mark.parametrize(
-    "knowledge_type, expected_shape",
+    "question_yaml, expected_shape",
     [
-        pytest.param("adr", "box", id="adr"),
-        pytest.param("classification", "diamond", id="classification"),
-        pytest.param(None, "oval", id="no-knowledge"),
+        pytest.param(QuestionYamlFactory(knowledge=KnowledgeDataFactory(type="adr")), "box", id="adr"),
+        pytest.param(QuestionYamlFactory(knowledge=KnowledgeDataFactory(type="classification")), "diamond", id="classification"),
+        pytest.param(QuestionYamlFactory(knowledge=None), "oval", id="no-knowledge"),
     ],
 )
 
 def test_GraphvizNode_determines_shape(
-    question: Question,
-    knowledge_type: str | None,
+    question_yaml: dict,
     expected_shape: str,
 ):
-    if knowledge_type is None:
-        question.knowledge = None
-    else:
-        question.knowledge.type = knowledge_type
+    # Setup
+    question_id, question_data = next(iter(question_yaml.items()))
+    question = Question.from_dict(id=question_id,
+                                  data=question_data
+                                  )
 
+    # Verification
     assert (
         GraphvizNode.determine_shape(question)
         == expected_shape

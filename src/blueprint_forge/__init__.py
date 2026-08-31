@@ -1,6 +1,12 @@
 from .domain.question import Question
-from .domain.knowledge import Knowledge
+from .domain.knowledge import (
+    Knowledge,
+    VALID_KNOWLEDGE_TYPES,
+)
 from .domain.reasoning import Reasoning
+from .domain.exceptions.domain_exceptions import (
+    InvalidKnowledgeType,
+)
 
 from .representation.graphviz.graph import GraphvizGraph
 from .representation.graphviz.config import GraphvizConfig
