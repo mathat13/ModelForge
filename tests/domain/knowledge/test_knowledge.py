@@ -25,12 +25,12 @@ def test_Knowledge_with_vaild_inputs(data):
         pytest.param(
             KnowledgeDataFactory(type="invalid"),
             "invalid",
-            id="invalid_string",
+            id="invalid_string_type",
         ),
         pytest.param(
             KnowledgeDataFactory(type=""),
             "",
-            id="empty_string",
+            id="empty_string_type",
         ),
     ],
 )

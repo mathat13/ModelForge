@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from blueprint_forge.domain.exceptions.domain_exceptions import InvalidKnowledgeType
 
 VALID_KNOWLEDGE_TYPES = frozenset({"adr", "classification"})
+
 @dataclass(frozen=True)
 class Knowledge:
     type: str

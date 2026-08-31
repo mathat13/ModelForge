@@ -8,3 +8,12 @@ class InvalidKnowledgeType(Exception):
         )
         self.expected=expected
         self.received=received
+
+class InvalidReasoningStatus(Exception):
+    def __init__(self, received: str, expected: str):
+        super().__init__(
+            f"Received reasoning status: '{received}'. "
+            f"Expected one of: {', '.join(sorted(expected))}"
+        )
+        self.expected=expected
+        self.received=received

@@ -6,13 +6,12 @@ from blueprint_forge import (
     GraphvizEdge,
     GraphvizGraph,
     GraphvizNode,
-    Knowledge,
 )
 
 from tests.factories.DataFactories import (
     KnowledgeDataFactory,
+    ReasoningDataFactory,
     QuestionYamlFactory,
-    QuestionYamlWithoutKnowledgeFactory,
 )
 
 def test_GraphvizNode_generates_from_question_correctly(question: Question):
@@ -42,9 +41,9 @@ def test_GraphvizNode_to_graphviz_generates_correctly(question: Question):
 @pytest.mark.parametrize(
     "question_yaml, expected_shape",
     [
-        pytest.param(QuestionYamlFactory(knowledge=KnowledgeDataFactory(type="adr")), "box", id="adr"),
-        pytest.param(QuestionYamlFactory(knowledge=KnowledgeDataFactory(type="classification")), "diamond", id="classification"),
-        pytest.param(QuestionYamlFactory(knowledge=None), "oval", id="no-knowledge"),
+        pytest.param(QuestionYamlFactory(knowledge=KnowledgeDataFactory(type="adr")), "box", id="adr->box"),
+        pytest.param(QuestionYamlFactory(knowledge=KnowledgeDataFactory(type="classification")), "diamond", id="classification->diamond"),
+        pytest.param(QuestionYamlFactory(knowledge=None), "oval", id="no-knowledge->oval"),
     ],
 )
 
@@ -65,27 +64,23 @@ def test_GraphvizNode_determines_shape(
     )
 
 @pytest.mark.parametrize(
-    "reasoning_status, knowledge, expected_peripheries",
+    "question_yaml, expected_peripheries",
     [
-        pytest.param("complete", None, 2, id="reasoning-artifact"),
-        pytest.param("complete", KnowledgeDataFactory(), None, id="knowledge-artifact"),
-        pytest.param("in_progress", None, None, id="no-artifact"),
+        pytest.param(QuestionYamlFactory(reasoning=ReasoningDataFactory(status="in_progress")), None, id="incomplete-reasoning-no-knowledge"),
+        pytest.param(QuestionYamlFactory(reasoning=ReasoningDataFactory(status="complete"), knowledge=KnowledgeDataFactory()), None, id="complete-reasoning-with-knowledge"),
+        pytest.param(QuestionYamlFactory(reasoning=ReasoningDataFactory(status="complete"), knowledge=None), 2, id="complete-reasoning-no-knowledge"),
     ],
 )
 
 def test_GraphvizNode_determines_peripheries(
-    question: Question,
-    reasoning_status: str,
-    knowledge: Knowledge | None,
+    question_yaml: dict,
     expected_peripheries: int,
 ):
     # Setup
-    if knowledge is None:
-            question.knowledge = None
-    else:
-        question.knowledge = knowledge
-
-    question.reasoning.status = reasoning_status
+    question_id, question_data = next(iter(question_yaml.items()))
+    question = Question.from_dict(id=question_id,
+                                  data=question_data
+                                  )
 
     # Execution/ Validation
     assert (

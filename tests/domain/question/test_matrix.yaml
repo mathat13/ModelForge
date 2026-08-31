@@ -4,6 +4,7 @@ id:
   invalid:
     - non-string
     - empty string
+    
 reasoning.status=complete:
   valid:
     - knowledge may exist
