@@ -1,17 +1,17 @@
+Question:
+  valid:
+    - all_fields
+    - no_knowledge
+    - no_reasoning_worksheet_path
+    - reasoning.status=complete+no_knowledge
+    - reasoning.status=complete+knowledge
+    - reasoning.status=in_progress+no_knowledge
+  invalid:
+    - reasoning.status=in_progress+knowledge
+
 id:
   valid:
     - non-empty string
   invalid:
     - non-string
     - empty string
-    
-reasoning.status=complete:
-  valid:
-    - knowledge may exist
-  invalid:
-
-reasoning.status=in_progress:
-  valid:
-    - knowledge must be None
-  invalid:
-    - knowledge exists

@@ -2,7 +2,11 @@ import pytest
 from typing import List
 
 from tests.factories.DataFactories import QuestionYamlFactory
-from blueprint_forge import Question
+
+from blueprint_forge import (
+    Question,
+    QuestionData,
+)
 
 
 @pytest.fixture
@@ -26,4 +30,13 @@ def question() -> "Question":
     return Question.from_dict(
             id=question_id,
             data=question_data,
+        )
+
+@pytest.fixture
+def make_question(question_yaml) -> Question:
+    question_id, question_data = next(iter(question_yaml.items()))
+    
+    return Question.from_dict(
+        id=question_id,
+        data=question_data
         )

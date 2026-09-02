@@ -1,0 +1,20 @@
+QuestionCollection:
+  valid:
+    - collection containing one Question
+    - collection containing multiple Questions
+    - all prerequisite references resolve
+    - no prerequisite cycles
+    - self-references absent
+
+  invalid:
+    - empty collection
+    - unknown prerequisite
+    - self-referential prerequisite
+    - single-element prerequisites A-B-A cycle
+    - single-element prerequisites A-B-C-A cycle
+    - single-element prerequisites A-B-C-B cycle
+    - nested multi-element prerequisites A-B-C-A cycle
+    - nested multi-element prerequisites A-B-C-B cycle
+  
+  impossible:
+    - multi-element prerequisites A-B-A cycle

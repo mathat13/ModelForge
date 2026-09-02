@@ -1,5 +1,4 @@
 # domain
-from .domain.question import Question
 from .domain.knowledge import (
     Knowledge,
     VALID_KNOWLEDGE_TYPES,
@@ -8,9 +7,15 @@ from .domain.reasoning import (
     Reasoning,
     VALID_REASONING_STATES,
 )
+from .domain.question import Question
+from .domain.question_collection import QuestionCollection
 from .domain.exceptions.domain_exceptions import (
     InvalidKnowledgeType,
     InvalidReasoningStatus,
+    InvalidQuestionID,
+    InvalidQuestionState,
+    InvalidPrerequisites,
+    EmptyQuestionCollection,
 )
 
 # representation

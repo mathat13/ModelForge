@@ -66,9 +66,30 @@ def test_GraphvizNode_determines_shape(
 @pytest.mark.parametrize(
     "question_yaml, expected_peripheries",
     [
-        pytest.param(QuestionYamlFactory(reasoning=ReasoningDataFactory(status="in_progress")), None, id="incomplete-reasoning-no-knowledge"),
-        pytest.param(QuestionYamlFactory(reasoning=ReasoningDataFactory(status="complete"), knowledge=KnowledgeDataFactory()), None, id="complete-reasoning-with-knowledge"),
-        pytest.param(QuestionYamlFactory(reasoning=ReasoningDataFactory(status="complete"), knowledge=None), 2, id="complete-reasoning-no-knowledge"),
+        pytest.param(
+            QuestionYamlFactory(
+                reasoning=ReasoningDataFactory(status="in_progress"),
+                knowledge=None
+            ),
+            None,
+            id="incomplete-reasoning-no-knowledge",
+        ),
+        pytest.param(
+            QuestionYamlFactory(
+                reasoning=ReasoningDataFactory(status="complete"),
+                knowledge=KnowledgeDataFactory()
+            ),
+            None,
+            id="complete-reasoning-with-knowledge"
+        ),
+        pytest.param(
+            QuestionYamlFactory(
+                reasoning=ReasoningDataFactory(status="complete"),
+                knowledge=None
+            ),
+            2, 
+            id="complete-reasoning-no-knowledge"
+        ),
     ],
 )
 

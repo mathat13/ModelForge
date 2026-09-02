@@ -41,8 +41,8 @@ class QuestionYamlFactory(factory.DictFactory):
         )
     )
 
-    prerequisites = factory.LazyAttribute(
-        lambda o: prerequisites_for(o.id)
+    prerequisites = factory.LazyFunction(
+        lambda: ["node_1", "node_2"]
     )
 
     @classmethod
