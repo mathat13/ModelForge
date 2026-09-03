@@ -2,6 +2,7 @@ from typing import List
 
 from blueprint_forge import (
     Question,
+    QuestionCollection,
     GraphvizRenderer,
     GraphvizConfig,
     GraphvizGraph,
@@ -15,7 +16,9 @@ def test_GraphVizRenderer_renders_correctly(questions: List[Question]):
         header="HEADER",
         footer="FOOTER",
     )
-    graph = GraphvizGraph.from_questions(questions=questions)
+    
+    question_collection = QuestionCollection(questions=questions)
+    graph = GraphvizGraph.from_question_collection(collection=question_collection)
 
     # Execution
     output = renderer.render(

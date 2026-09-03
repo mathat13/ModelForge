@@ -3,6 +3,7 @@ from typing import List
 
 from blueprint_forge import (
     Question,
+    QuestionCollection,
     GraphvizEdge,
     GraphvizGraph,
     GraphvizNode,
@@ -157,8 +158,10 @@ def test_GraphvizEdge_to_graphviz_generates_correctly():
     assert output == "node_2 -> node_1"
 
 def test_GraphvizGraph_generates_from_list_of_questions(questions: List[Question]):
+    # Setup
+    question_collection = QuestionCollection(questions=questions)
     # Execution
-    graph = GraphvizGraph.from_questions(questions=questions)
+    graph = GraphvizGraph.from_question_collection(collection=question_collection)
 
     # Validation
     assert isinstance(graph, GraphvizGraph)

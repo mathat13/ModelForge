@@ -6,6 +6,7 @@ from blueprint_forge import (
     GraphvizFileWriter,
     GraphvizGraph,
     Question,
+    QuestionCollection,
 )
 
 from blueprint_forge.application.graphviz.renderer import GraphvizRenderer
@@ -41,9 +42,12 @@ class GraphvizApplication:
                     data=validated_data.model_dump(),
                 )
             )
+
+        # Validate question relationships
+        question_collection = QuestionCollection(questions=questions)
             
         # Construct Graphviz representation
-        graph = GraphvizGraph.from_questions(questions)
+        graph = GraphvizGraph.from_question_collection(collection=question_collection)
 
         # Load rendering configuration
         config = GraphvizConfigLoader.load(

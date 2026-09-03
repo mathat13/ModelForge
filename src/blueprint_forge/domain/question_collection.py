@@ -38,7 +38,7 @@ class QuestionCollection:
                 # Check for unknown prerequisites
                 if prerequisite not in dictionary:
                     raise InvalidPrerequisites(
-                        reason=f"Prerequisite on question: {id} references non-existent question: {prerequisite}.",
+                        reason=f"Prerequisite on question: {question_id} references non-existent question: {prerequisite}.",
                     )
 
         def visit(question_id, path):

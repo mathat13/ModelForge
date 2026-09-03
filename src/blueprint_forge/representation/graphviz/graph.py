@@ -3,6 +3,7 @@ from typing import List
 from textwrap import wrap
 
 from blueprint_forge.domain.question import Question
+from blueprint_forge.domain.question_collection import QuestionCollection
 from blueprint_forge.representation.graphviz.node import GraphvizNode
 from blueprint_forge.representation.graphviz.edge import GraphvizEdge
 
@@ -14,7 +15,10 @@ class GraphvizGraph:
     edges: List[GraphvizEdge]
 
     @classmethod
-    def from_questions(cls, questions: List[Question]) -> "GraphvizGraph":
+    def from_question_collection(cls, collection: QuestionCollection) -> "GraphvizGraph":
+
+            questions = collection.questions
+
             nodes = [
                 GraphvizNode.from_question(question)
                 for question in questions
