@@ -16,6 +16,7 @@ from .domain.exceptions.domain_exceptions import (
     InvalidQuestionState,
     InvalidPrerequisites,
     EmptyQuestionCollection,
+    DuplicateQuestionID,
 )
 
 # representation

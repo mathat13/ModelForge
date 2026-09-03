@@ -9,6 +9,7 @@ from blueprint_forge import (
     QuestionCollection,
     EmptyQuestionCollection,
     InvalidPrerequisites,
+    DuplicateQuestionID,
 )
 
 def make_question(question_yaml) -> Question:
@@ -149,6 +150,24 @@ def test_QuestionCollection_accepts_valid_data(data):
             ],
             InvalidPrerequisites,
             id="unknown_prerequisite",
+        ),
+        pytest.param(
+            [
+                make_question(
+                    QuestionYamlFactory(
+                        id="node_0",
+                        prerequisites=[],
+                    )
+                ),
+                make_question(
+                    QuestionYamlFactory(
+                        id="node_0",
+                        prerequisites=[],
+                    )
+                ),
+            ],
+            DuplicateQuestionID,
+            id="duplicate_question_id",
         ),
         pytest.param(
             [

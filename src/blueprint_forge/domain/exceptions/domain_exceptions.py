@@ -1,5 +1,6 @@
 from typing import Literal
 
+
 class InvalidKnowledgeType(Exception):
     def __init__(self, received: str, expected: str):
         super().__init__(
@@ -34,6 +35,14 @@ class InvalidQuestionState(Exception):
         super().__init__(
             f"Invalid question state: {reason}. "
             f"Received: {received!r}"
+        )
+
+class DuplicateQuestionID(Exception):
+    def __init__(self, question_id: str):
+        self.quetion_id = question_id
+
+        super().__init__(
+            f"Duplicate question ID detected: {question_id}. "
         )
 
 class InvalidPrerequisites(Exception):

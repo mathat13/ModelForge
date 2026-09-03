@@ -8,6 +8,7 @@ QuestionCollection:
 
   invalid:
     - empty collection
+    - Duplicate question ids
     - unknown prerequisite
     - self-referential prerequisite
     - single-element prerequisites A-B-A cycle

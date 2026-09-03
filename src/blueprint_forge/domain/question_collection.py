@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from blueprint_forge.domain.question import Question
 from blueprint_forge.domain.exceptions.domain_exceptions import (
     EmptyQuestionCollection,
+    DuplicateQuestionID,
     InvalidPrerequisites,
 )
 
@@ -14,11 +15,16 @@ class QuestionCollection:
         # check for empty list
         if not self.questions:
             raise EmptyQuestionCollection()
-        
-        # construct dictionary of question_id: prerequisites
-        dictionary = {
-            question.id: question.prerequisites for question in self.questions
-        }
+
+        # Construct dictionary of question.id: question.prerequisites 
+        dictionary = {}
+
+        for question in self.questions:
+            # Check for duplicate question ids
+            if question.id in dictionary:
+                raise DuplicateQuestionID(question_id=question.id)
+
+            dictionary[question.id] = question.prerequisites
 
         for question_id, prerequisites in dictionary.items():
             for prerequisite in prerequisites:
@@ -48,7 +54,7 @@ class QuestionCollection:
 
             path.remove(question_id)
 
-
+        # Check for prerequisite cycles
         for question_id in dictionary:
             visit(question_id, set())
     
