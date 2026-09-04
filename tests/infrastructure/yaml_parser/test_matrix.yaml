@@ -1,0 +1,5 @@
+YAMLParser:
+  valid:
+    - file exists
+  invalid:
+    - file does not exist

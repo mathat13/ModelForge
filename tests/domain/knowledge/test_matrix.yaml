@@ -1,4 +1,4 @@
-knowledge.type:
+.type:
   valid:
     - "adr"
     - "classification"

@@ -1,7 +1,11 @@
 import pytest
 from pydantic import ValidationError
 
-from blueprint_forge import GraphvizApplication
+from blueprint_forge import (
+    GraphvizApplication,
+)
+
+#--- Happy Paths
 
 def test_GraphvizApplication_generates_dot_file_on_valid_data(tmp_path):
     # Setup
@@ -63,6 +67,30 @@ def test_GraphvizApplication_generates_dot_file_on_valid_data(tmp_path):
     assert "node_2" in output
     assert 'label="What' in output
     assert "node_1 -> node_2" in output
+
+# --- Sad paths
+
+def test_GraphvizApplication_rejects_empty_yaml(tmp_path):
+    # Setup
+    yaml_path = tmp_path / "questions.yaml"
+    header_path = tmp_path / "header.dot"
+    footer_path = tmp_path / "footer.dot"
+    output_path = tmp_path / "output.dot"
+
+    yaml_path.write_text("")
+    header_path.write_text("HEADER")
+    footer_path.write_text("FOOTER")
+
+    application = GraphvizApplication()
+
+    # Validation
+    with pytest.raises(EmptyDataException):
+        application.generate(
+            yaml_path=yaml_path,
+            header_path=header_path,
+            footer_path=footer_path,
+            output_path=output_path,
+        )
 
 def test_application_rejects_invalid_question_data(tmp_path):
     # Setup

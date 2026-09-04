@@ -1,6 +1,7 @@
 from pathlib import Path
-from blueprint_forge.representation.graphviz.config import GraphvizConfig
 
+from blueprint_forge.representation.graphviz.config import GraphvizConfig
+from blueprint_forge.infrastructure.exceptions.infrastructure_exceptions import ConfigFileNotFound
 class GraphvizConfigLoader:
 
     @staticmethod
@@ -9,7 +10,16 @@ class GraphvizConfigLoader:
         footer_path: Path,
     ) -> GraphvizConfig:
 
-        return GraphvizConfig(
-            header=header_path.read_text(),
-            footer=footer_path.read_text(),
-        )
+        try:
+            header = header_path.read_text()
+        except FileNotFoundError:
+            raise ConfigFileNotFound(path=header_path)
+    
+        try:
+            footer=footer_path.read_text()
+        except FileNotFoundError:
+            raise ConfigFileNotFound(path=footer_path)
+
+        return GraphvizConfig(header=header,
+                              footer=footer,
+                              )

@@ -1,3 +1,10 @@
+Question.id:
+  valid:
+    - non-empty string
+  invalid:
+    - non-string
+    - empty string
+
 Question:
   valid:
     - all_fields
@@ -8,10 +15,3 @@ Question:
     - reasoning.status=in_progress+no_knowledge
   invalid:
     - reasoning.status=in_progress+knowledge
-
-id:
-  valid:
-    - non-empty string
-  invalid:
-    - non-string
-    - empty string

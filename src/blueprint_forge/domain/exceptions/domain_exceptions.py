@@ -1,5 +1,4 @@
-from typing import Literal
-
+#--- Knowledge
 
 class InvalidKnowledgeType(Exception):
     def __init__(self, received: str, expected: str):
@@ -10,6 +9,8 @@ class InvalidKnowledgeType(Exception):
         self.expected=expected
         self.received=received
 
+#--- Reasoning
+
 class InvalidReasoningStatus(Exception):
     def __init__(self, received: str, expected: str):
         super().__init__(
@@ -18,6 +19,8 @@ class InvalidReasoningStatus(Exception):
         )
         self.expected=expected
         self.received=received
+
+# --- Question
 
 class InvalidQuestionID(Exception):
     def __init__(self, received):
@@ -37,9 +40,19 @@ class InvalidQuestionState(Exception):
             f"Received: {received!r}"
         )
 
+# --- QuestionCollection
+
+class EmptyQuestionCollection(Exception):
+    def __init__(self):
+
+        super().__init__(
+            f"Received empty question collection. "
+            f"Expected at least one question."
+        )
+
 class DuplicateQuestionID(Exception):
     def __init__(self, question_id: str):
-        self.quetion_id = question_id
+        self.question_id = question_id
 
         super().__init__(
             f"Duplicate question ID detected: {question_id}. "
@@ -52,12 +65,4 @@ class InvalidPrerequisites(Exception):
         super().__init__(
             f"Invalid prerequisites detected: "
             f"{reason}"
-        )
-
-class EmptyQuestionCollection(Exception):
-    def __init__(self):
-
-        super().__init__(
-            f"Received empty question collection. "
-            f"Expected at least one question."
         )

@@ -1,0 +1,5 @@
+GraphvizConfigLoader:
+  valid:
+    - file found
+  invalid:
+    - file not found
