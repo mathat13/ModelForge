@@ -2,6 +2,8 @@
 from .application.graphviz.renderer import GraphvizRenderer
 from .application.graphviz.application import GraphvizApplication
 from .application.inputs import QuestionData
+from .application.question_service import QuestionService
+from .application.exceptions.application_exceptions import InvalidQuestionSourceData
 
 # domain
 from .domain.knowledge import (

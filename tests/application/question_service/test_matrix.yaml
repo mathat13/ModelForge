@@ -2,12 +2,7 @@ QuestionService.load:
   valid:
     - dictionary containing non-empty questions mapping
   invalid:
-    - None
-    - missing questions field
-    - empty questions field
-
-QuestionService:
-  valid:
-
-  invalid:
-  
+    - non-dictionary
+    - dictionary without a non-empty questions mapping
+  integration:
+    - 
